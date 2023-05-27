@@ -1,1 +1,7 @@
-# Pia-Lara-Fase-2
+# Como ejecutamos la aplicación 
+
+```python3
+ flask run --debugger
+```
+
+
