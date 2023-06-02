@@ -33,24 +33,26 @@ forced_decoder_ids = processor.get_decoder_prompt_ids(language="spanish", task="
 def index():
     return render_template('index.html')
 
-@app.route('/audios/save-record', methods=['POST'])
-def save_record():
+@app.route('/process-audio', methods=['POST'])
+def process_audio():
     audio_file = request.files['file']
     if not os.path.isdir('audio_files'):
         os.makedirs('audio_files')
+
     name_audio = str(uuid.uuid4()) + '.wav'
+    audioPath = rutaAudio + name_audio
 
     audio_file.save(os.path.join('audio_files', name_audio))
     song = AudioSegment.from_file(rutaAudio + name_audio)
-    song.export(rutaAudio, format="wav")
-    data, s = librosa.load(rutaAudio + name_audio, sr=16000) 
+    song.export(audioPath, format="wav")
+    data, s = librosa.load(audioPath, sr=16000) 
     input_features = processor(data, sampling_rate=16000, return_tensors="pt").input_features 
     predicted_ids = model.generate(input_features, forced_decoder_ids=forced_decoder_ids)
     transcription = processor.batch_decode(predicted_ids, skip_special_tokens=True)
 
     print(transcription)
 
-    return {'status': 'ok', 'message': transcription} 
+    return transcription
 
 if __name__ == '__main__':
     app.run(debug=True)
