@@ -47,6 +47,9 @@ def save_record():
     input_features = processor(data, sampling_rate=16000, return_tensors="pt").input_features 
     predicted_ids = model.generate(input_features, forced_decoder_ids=forced_decoder_ids)
     transcription = processor.batch_decode(predicted_ids, skip_special_tokens=True)
+
+    print(transcription)
+
     return {'status': 'ok', 'message': transcription} 
 
 if __name__ == '__main__':
