@@ -3,6 +3,7 @@ const recordedAudio = document.querySelector('#recorded-audio');
 const spinner = document.querySelector('#spinner');
 const canvas = document.querySelector('.visualizer');
 const $sendButton = $("#send-button");
+const $result = $("#result");
 
 let audioChunks = [];
 let generalBlob = '';
@@ -47,6 +48,8 @@ recordButton.addEventListener('click', () => {
         mediaRecorder.stop();
         duration = parseInt((new Date() - duration) / 1000);
     }
+
+    $result.html('');
 });
 
 $sendButton.on('click', () => {
@@ -54,10 +57,16 @@ $sendButton.on('click', () => {
 
     var form = new FormData();
     form.append('file', generalBlob);
+    form.append('model', document.getElementById('model').value)
+    
     $sendButton
         .attr('disabled', true)
         .text('espere...');
     form.append('duration', duration);
+
+    $sendButton
+            .attr('disabled', true)
+            .text('espere...');
 
     $.ajax({
         type: 'POST',
@@ -68,13 +77,14 @@ $sendButton.on('click', () => {
         contentType: false,
     })
     .done(function (data) {
+        
         $sendButton
             .hide()
             .attr('disabled', false)
-            .text('espere...');
+            .text('Enviar');
 
         recordedAudio.controls = false;
-        document.getElementById("result").innerHTML = data;
+        $result.html(data);
 
     }).fail(e => {
         swal({

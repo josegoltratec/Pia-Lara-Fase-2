@@ -1,19 +1,3 @@
-
-#from flask import Flask, render_template, request
-
-#app = Flask(__name__)
-
-
-
-#@app.route("/process-audio", methods=['POST'])
-#def process_audio():
-#    return 'jose'
-
-
-#@app.route("/")
-#def index():
- #   return render_template('index.html')
-
 from flask import Flask, render_template, request
 import os
 from transformers import AutoProcessor, AutoModelForSpeechSeq2Seq
@@ -23,11 +7,6 @@ from pydub import AudioSegment
 
 app = Flask(__name__)
 
-MODEL_PATH = "model"
-ruta_audio = "audio_files/"
-processor = AutoProcessor.from_pretrained(MODEL_PATH)
-model = AutoModelForSpeechSeq2Seq.from_pretrained(MODEL_PATH)
-forced_decoder_ids = processor.get_decoder_prompt_ids(language="spanish", task="transcribe")
 
 @app.route('/')
 def index():
@@ -36,11 +15,24 @@ def index():
 @app.route('/process-audio', methods=['POST'])
 def process_audio():
     audio_file = request.files['file']
+    model_type = request.form.get('model')
+    
     if not os.path.isdir('audio_files'):
         os.makedirs('audio_files')
 
+    MODEL_PATH = "model-a"
+
+    if model_type == 'model-b':
+        MODEL_PATH = 'model-b'
+        
+    
+    ruta_audio = "audio_files/"
     name_audio = str(uuid.uuid4()) + '.wav'
     audio_path = ruta_audio + name_audio
+
+    processor = AutoProcessor.from_pretrained(MODEL_PATH)
+    model = AutoModelForSpeechSeq2Seq.from_pretrained(MODEL_PATH)
+    forced_decoder_ids = processor.get_decoder_prompt_ids(language="spanish", task="transcribe")
 
     audio_file.save(os.path.join('audio_files', name_audio))
     song = AudioSegment.from_file(audio_path)

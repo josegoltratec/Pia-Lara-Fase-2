@@ -1,5 +1,6 @@
 .DS_Store
 __pycache__/
 piaVenv
-model
+model-a
+model-b
 audio_files

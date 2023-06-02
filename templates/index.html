@@ -5,6 +5,11 @@
         <h1 class="text-center">Grabar audio</h1>
     </header>
 
+    <section>
+        <span><input id="model" type="radio" name="model" value="model-a" checked="checked"> Modelo A</span>
+        <span><input id="model" type="radio" name="model" value="model-b"> Modelo B</span>
+    </section>
+
     <section class="audio">
         <canvas class="visualizer" height="60px"></canvas>
         <audio src="" id="recorded-audio"></audio>
@@ -15,6 +20,8 @@
         </button>
     </section>
 
+    <p id="result"></p>
+
     <section class="bottom">
         <button class="button send-button" id="send-button">
         <div hidden id="spinner" class="spinner-border spinner-border-sm" role="status">
@@ -24,7 +31,7 @@
         </button>
     </section>
 
-    <p id="result"></p>
+    
 
     <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
     <script src="{{ url_for('static', filename='js/speech-synthesis.js') }}"></script>
