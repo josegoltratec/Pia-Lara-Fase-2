@@ -19,6 +19,7 @@ body {
   flex-direction: column;
   height: 100%;
   align-items: center;
+  justify-content: center;
 }
 
 .header {
@@ -58,7 +59,7 @@ body {
     height: auto;
     border-radius: 50%;
     padding: 10px;
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .15);
 
     & svg,
     & i::before {
@@ -107,6 +108,23 @@ body {
   opacity: .7;
 }
 
+.content{
+  text-align: center;
+
+  section, header{
+    margin-bottom: 25px;
+    
+  }
+
+  .model span{
+    padding: 0 20px;
+  }
+
+  #result{
+    font-size: 32px;
+    color: green;
+  }
+}
 
 @import "style_client_tag";
 @import "style_client_audio";
