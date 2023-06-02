@@ -11,11 +11,15 @@ databricks-cli==0.17.7
 docker==6.1.2
 docutils==0.19
 entrypoints==0.4
+filelock==3.12.0
 Flask==2.2.2
 fonttools==4.39.4
+fsspec==2023.5.0
 gitdb==4.0.10
 GitPython==3.1.31
+greenlet==2.0.2
 gunicorn==20.1.0
+huggingface-hub==0.14.1
 idna==3.4
 importlib-metadata==6.6.0
 itsdangerous==2.1.2
@@ -41,6 +45,7 @@ python-dateutil==2.8.2
 pytz==2023.3
 PyYAML==6.0
 querystring-parser==1.2.4
+regex==2023.5.5
 requests==2.28.1
 s3transfer==0.6.0
 scikit-learn==1.2.2
@@ -51,6 +56,9 @@ SQLAlchemy==2.0.15
 sqlparse==0.4.4
 tabulate==0.9.0
 threadpoolctl==3.1.0
+tokenizers==0.13.3
+tqdm==4.65.0
+transformers==4.29.2
 typing_extensions==4.6.2
 tzdata==2023.3
 urllib3==1.26.12
